@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta escrita a mano</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Librería Flipbook (efecto de revista) -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+
+    <style>
+        /* Estilo para el botón flotante de música */
+        .music-control-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #565656;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        .music-control-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="letter-page">
+
+    <!-- AUDIO DE FONDO CON EL ARCHIVO LOCAL -->
+    <audio id="bg-audio" loop>
+        <source src="Lizzy_McAlpine_-_The_light_in_the_painting.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Botón flotante para reproducir o pausar la música -->
+    <button id="music-btn" class="music-control-btn" onclick="toggleMusic()">🎵 Reproducir música</button>
+
+    <!-- Botón para regresar al pastel -->
+    <a href="pastel.html" class="back-btn">← Volver al pastel</a>
+
+    <!-- CONTENEDOR DEL LIBRO FLIPBOOK -->
+    <div class="book-section">
+        <div id="my-book" class="flip-book">
+            <div class="page"><img src="carta1.PNG" alt="Carta 1" class="page-img"></div>
+            <div class="page"><img src="carta2.PNG" alt="Carta 2" class="page-img"></div>
+            <div class="page"><img src="carta3.PNG" alt="Carta 3" class="page-img"></div>
+            <div class="page"><img src="carta4.PNG" alt="Carta 4" class="page-img"></div>
+            <div class="page"><img src="carta5.PNG" alt="Carta 5" class="page-img"></div>
+            <div class="page"><img src="carta6.PNG" alt="Carta 6" class="page-img"></div>
+        </div>
+    </div>
+
+    <!-- INDICADOR DE PÁGINA -->
+    <div class="page-indicator">
+        Página <span id="current-page">1</span> de <span id="total-pages">6</span>
+    </div>
+
+    <script>
+        const audio = document.getElementById("bg-audio");
+        const musicBtn = document.getElementById("music-btn");
+        
+        const targetVolume = 0.6; // Volumen normal al que queremos llegar (60%)
+
+        // Función para hacer que el volumen suba poco a poco (Fade In)
+        function fadeInAudio() {
+            audio.volume = 0;
+            audio.play().then(() => {
+                musicBtn.textContent = "Pausar música";
+                
+                let currentVol = 0;
+                const fadeInterval = setInterval(() => {
+                    if (currentVol < targetVolume) {
+                        currentVol += 0.05; // Sube un poquito cada vez
+                        if (currentVol > targetVolume) currentVol = targetVolume;
+                        audio.volume = currentVol;
+                    } else {
+                        clearInterval(fadeInterval);
+                    }
+                }, 200); // Cada 0.2 segundos sube el volumen suavemente
+            }).catch(error => {
+                console.log("El navegador requiere interacción para iniciar el audio.");
+            });
+        }
+
+        // Adelantar los primeros 15 segundos de la canción
+        audio.addEventListener('loadedmetadata', function() {
+            audio.currentTime = 15;
+        });
+
+        function toggleMusic() {
+            if (audio.paused) {
+                fadeInAudio();
+            } else {
+                audio.pause();
+                musicBtn.textContent = "The light in the painting";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Iniciar con el efecto de entrada suave al cargar la página
+            fadeInAudio();
+
+            // Inicializar el Flipbook
+            const pageFlip = new St.PageFlip(
+                document.getElementById("my-book"),
+                {
+                    width: 400,
+                    height: 550,
+                    size: "fixed",
+                    minWidth: 300,
+                    maxWidth: 600,
+                    minHeight: 400,
+                    maxHeight: 800,
+                    maxShadowOpacity: 0.5,
+                    showCover: false,
+                    mobileScrollSupport: true
+                }
+            );
+
+            pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+
+            const currentPageSpan = document.getElementById("current-page");
+            const totalPagesSpan = document.getElementById("total-pages");
+
+            totalPagesSpan.innerText = pageFlip.getPageCount();
+
+            pageFlip.on("flip", (e) => {
+                currentPageSpan.innerText = e.data + 1;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

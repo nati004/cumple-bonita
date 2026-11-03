@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día de mi bonita</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Estilo para el botón flotante de música */
+        .music-control-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #565656;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        .music-control-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="cake-page">
+
+    <!-- AUDIO DE FONDO CON LAS MAÑANITAS DE CEPILLÍN -->
+    <audio id="bg-audio" loop>
+        <source src="LAS_MAnANITAS_CEPILLIN.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Botón flotante para reproducir o pausar la música -->
+    <button id="music-btn" class="music-control-btn" onclick="toggleMusic()">Reproducir las mañanitas</button>
+
+    <!-- SECCIÓN DEL PASTEL -->
+    <div class="cake-container">
+        <!-- Texto Feliz Cumpleaños -->
+        <h1 id="happy-birthday" class="show">Feliz Cumpleaños</h1>
+
+        <!-- Imagen base del pastel -->
+        <img src="pastel.PNG" alt="Pastel" id="cake">
+
+        <!-- Contenedor donde irán apareciendo las 14 velas -->
+        <div id="candles-wrapper"></div>
+    </div>
+
+    <!-- SOBRE INTERACTIVO DEBAJO DEL PASTEL -->
+    <div class="envelope-container" onclick="openEnvelope()">
+        <img id="envelope-img" src="sobrecerrado.PNG" alt="Carta Para Mi Ángel" class="envelope-img">
+        <p class="envelope-hint">Toca para abrir tu carta</p>
+    </div>
+
+    <!-- SECCIÓN ESTILO THREADS CON USUARIO, TUS GIFS Y GLOBO -->
+    <div class="threads-post-container">
+        <!-- Foto de perfil circular utilizando perfil.PNG -->
+        <img src="perfil.PNG" alt="Perfil" class="threads-profile-pic">
+
+        <!-- Contenedor del nombre de usuario y el globo de diálogo -->
+        <div class="threads-content-wrapper">
+            <div class="threads-username">nati <span class="threads-handle">(de Ananolehablen)</span></div>
+
+            <div class="threads-bubble-wrapper">
+                <!-- MARCO DE GIFS RESTANTES (MÁS PEQUEÑOS Y ORDENADOS) -->
+                <!-- Parte Superior -->
+                <img src="estrellas.gif" class="sticker st-top-1" alt="sticker">
+                <img src="brillos.gif" class="sticker st-top-2" alt="sticker">
+                <img src="anaangry.gif" class="sticker st-top-3" alt="sticker">
+                <img src="brillos.gif" class="sticker st-top-4" alt="sticker">
+                <img src="estrellas.gif" class="sticker st-top-5" alt="sticker">
+
+                <!-- Lado Izquierdo -->
+                <img src="yoburbu.gif" class="sticker st-left-1" alt="sticker">
+                <img src="brillos.gif" class="sticker st-left-2" alt="sticker">
+
+                <!-- Lado Derecho -->
+                <img src="brillos.gif" class="sticker st-right-1" alt="sticker">
+                <img src="yoburbu.gif" class="sticker st-right-2" alt="sticker">
+
+                <!-- Parte Inferior -->
+                <img src="estrellas.gif" class="sticker st-bot-1" alt="sticker">
+                <img src="brillos.gif" class="sticker st-bot-2" alt="sticker">
+                <img src="estrellas.gif" class="sticker st-bot-3" alt="sticker">
+
+                <!-- GLOBO DE DIÁLOGO TIPO THREADS -->
+                <div class="threads-speech-bubble" onclick="this.classList.toggle('active')">
+                    <div class="morse-code-text">
+                        -.. .. ... ..-. .-. ..- - ---<br>
+                        --.- ..- . .-. . .-. - . ,<br>
+                        . .-. . ...   -- ..<br>
+                        ..-. . .-.. .. -.-. .. -.. .- -..   . -. - . .-. .-
+                    </div>
+                    
+                    <!-- Texto revelado en Arial -->
+                    <div class="threads-revealed-text">
+                        Disfruto quererte, eres mi felicidad entera
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DEL JUEGO DE UNIR FRASES (DEBAJO DE TODO) -->
+    <div class="matching-game-container">
+        <h3>Relaciona las frases </h3>
+        <p class="game-instruction">Haz clic en una opción de la izquierda y luego en su pareja correcta de la derecha plsss</p>
+
+        <div class="game-board">
+            <!-- Columna Izquierda -->
+            <div class="column" id="left-column">
+                <button class="game-item" data-id="1">Mimo</button>
+                <button class="game-item" data-id="2">Me voy</button>
+                <button class="game-item" data-id="3">Sale vale</button>
+                <button class="game-item" data-id="4">Ana</button>
+                <button class="game-item" data-id="5">Te quiero</button>
+            </div>
+
+            <!-- Columna Derecha -->
+            <div class="column" id="right-column">
+                <button class="game-item" data-id="3">pero que sea verdad eh</button>
+                <button class="game-item" data-id="5">infinito</button>
+                <button class="game-item" data-id="1">monito bonita</button>
+                <button class="game-item" data-id="4">nati</button>
+                <button class="game-item" data-id="2">y no vuelvo</button>
+            </div>
+        </div>
+
+        <div id="game-message" class="game-msg"></div>
+
+        <!-- CONTENEDOR DE LA IMAGEN ESPECIAL AL GANAR -->
+        <div id="win-container" class="win-container hidden">
+            <img src="yohada.PNG" alt="¡Ganaste!" class="win-image">
+            <p class="win-text">whaaaat, que increíble ereees mi bonita. Te ganaste que cumpla todos los deseos que me pidas. 🥺</p>
+        </div>
+    </div>
+
+    <!-- ESPACIO VACÍO AL FINAL DE LA PÁGINA -->
+    <div style="height: 100px; width: 100%;"></div>
+
+    <!-- SCRIPT EXTERNO ÚNICO -->
+    <script src="script.js"></script>
+
+    <!-- SCRIPT DE MÚSICA (MINUTO 1:17 = 77 SEGUNDOS + FADE IN) -->
+    <script>
+        const audio = document.getElementById("bg-audio");
+        const musicBtn = document.getElementById("music-btn");
+        
+        const targetVolume = 0.6; // Volumen normal (60%)
+
+        // Forzar el salto a 1:17 (77 segundos) justo cuando el audio esté listo
+        audio.addEventListener('canplaythrough', function() {
+            if (audio.currentTime < 75) {
+                audio.currentTime = 77;
+            }
+        }, { once: true });
+
+        // Función de entrada suave (Fade In)
+        function fadeInAudio() {
+            audio.currentTime = 77; // Asegurar el salto al reproducir
+            audio.volume = 0;
+            audio.play().then(() => {
+                musicBtn.textContent = "Pausar las mañanitas";
+                
+                let currentVol = 0;
+                const fadeInterval = setInterval(() => {
+                    if (currentVol < targetVolume) {
+                        currentVol += 0.05;
+                        if (currentVol > targetVolume) currentVol = targetVolume;
+                        audio.volume = currentVol;
+                    } else {
+                        clearInterval(fadeInterval);
+                    }
+                }, 200);
+            }).catch(error => {
+                console.log("El navegador requiere interacción para iniciar el audio.");
+            });
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                fadeInAudio();
+            } else {
+                audio.pause();
+                musicBtn.textContent = "Reproducir las mañanitas";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fadeInAudio();
+        });
+    </script>
+
+</body>
+
+</html>
