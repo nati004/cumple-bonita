@@ -34,18 +34,18 @@
 <body class="cake-page">
 
     <!-- AUDIO DE FONDO CON LAS MAÑANITAS DE CEPILLÍN -->
-    <audio id="bg-audio" loop>
+    <audio id="background-music" autoplay loop>
         <source src="LAS_MAnANITAS_CEPILLIN.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
     <!-- Botón flotante para reproducir o pausar la música -->
-    <button id="music-btn" class="music-control-btn" onclick="toggleMusic()">Reproducir las mañanitas</button>
+    <button id="music-btn" class="music-control-btn" onclick="toggleMusic()">Pausar las mañanitas</button>
 
     <!-- SECCIÓN DEL PASTEL -->
     <div class="cake-container">
         <!-- Texto Feliz Cumpleaños -->
-       <img id="happy-birthday" class="show" src="./Feliz.PNG" alt="Feliz Cumpleaños">
+        <img id="happy-birthday" class="show" src="./Feliz.PNG" alt="Feliz Cumpleaños">
 
         <!-- Imagen base del pastel -->
         <img src="pastel.PNG" alt="Pastel" id="cake">
@@ -151,7 +151,7 @@
 
     <!-- SCRIPT DE MÚSICA (MINUTO 1:17 = 77 SEGUNDOS + FADE IN) -->
     <script>
-        const audio = document.getElementById("bg-audio");
+        const audio = document.getElementById("background-music");
         const musicBtn = document.getElementById("music-btn");
         
         const targetVolume = 0.6; // Volumen normal (60%)
@@ -182,6 +182,16 @@
                 }, 200);
             }).catch(error => {
                 console.log("El navegador requiere interacción para iniciar el audio.");
+                musicBtn.textContent = "Reproducir las mañanitas";
+                
+                // Activar con el primer toque/clic si el navegador bloqueó el autoplay
+                const enableOnInteraction = function() {
+                    fadeInAudio();
+                    window.removeEventListener('click', enableOnInteraction);
+                    window.removeEventListener('touchstart', enableOnInteraction);
+                };
+                window.addEventListener('click', enableOnInteraction);
+                window.addEventListener('touchstart', enableOnInteraction);
             });
         }
 
