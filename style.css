@@ -67,7 +67,7 @@ body.candle-clicked #continue { opacity: 0; pointer-events: none; }
    ========================================== */
 
 body.cake-page {
-    background-color: #2e2938 !important; /* Mantiene el tono morado de fondo siempre */
+    background-color: #2e2938 !important;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><g fill="%23e8e8e8" opacity="0.85"><path transform="translate(40, 30) scale(0.65)" d="M10,0 L13,7 L20,8 L15,13 L16,20 L10,16 L4,20 L5,13 L0,8 L7,7 Z"/><path transform="translate(220, 70) scale(0.9)" d="M10,0 L13,7 L20,8 L15,13 L16,20 L10,16 L4,20 L5,13 L0,8 L7,7 Z"/><path transform="translate(130, 210) scale(0.55)" d="M10,0 L13,7 L20,8 L15,13 L16,20 L10,16 L4,20 L5,13 L0,8 L7,7 Z"/></g></svg>') !important;
     background-repeat: repeat !important;
     display: flex !important;
@@ -75,30 +75,28 @@ body.cake-page {
     justify-content: center !important;
     align-items: center !important;
     min-height: 100vh;
+    height: auto !important;
+    overflow-y: auto !important;
     margin: 0;
-    padding: 30px 0;
+    padding: 30px 0 60px 0;
     box-sizing: border-box;
-    
 }
 
-/* TEXTO FELIZ CUMPLEAÑOS (Posicionado más abajo, justo sobre las velas) */
 #happy-birthday {
     position: absolute !important;
-    top: -90px !important; /* <-- Cambia este número si quieres bajarlo aún más (ej. -45px) o subirlo (ej. -65px) */
+    top: -130px !important; /* Ajusta esta distancia si necesitas subirla un poco más al crecer */
     left: 50% !important;
     transform: translateX(-50%) !important;
-    font-family: "SloopScript", "Dancing Script", "Brush Script MT", cursive, sans-serif !important;
-    font-size: 75px !important;
-    font-weight: 300 !important;
-    color: #ffffff !important;
+    width: 510px !important;  /* <--- Aquí la hacemos más grande (puedes probar 450px si la quieres aún mayor) */
+    height: auto !important;
+    display: block !important;
+    border: none !important;
+    background: transparent !important;
     margin: 0 !important;
-    white-space: nowrap !important;
     opacity: 1 !important;
     visibility: visible !important;
     z-index: 999 !important;
-    text-align: center;
-    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
-    -webkit-font-smoothing: antialiased;
+    filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.5));
 }
 
 #happy-birthday.show {
@@ -112,7 +110,7 @@ body.cake-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 150px !important; /* <--- Cambiado de 100px a 160px para bajar el pastel y dar aire arriba */
+    margin-top: 150px !important;
 }
 
 #cake {
@@ -159,8 +157,8 @@ body.cake-page {
 
 /* SOBRE INTERACTIVO */
 .envelope-container {
-    margin-top: -60px !important;    /* Un valor negativo lo sube hacia el pastel */
-    margin-bottom: 40px !important; /* Mantiene un espacio cómodo respecto al borde inferior */
+    margin-top: -60px !important;
+    margin-bottom: 40px !important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -192,42 +190,6 @@ body.cake-page {
     font-size: 0.95rem;
     opacity: 0.85;
 }
-/* ==========================================
-   SECCIÓN IMAGEN MORSE CON TEXTO OCULTO
-   ========================================== */
-
-.morse-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 20px !important;   /* Espacio respecto a la carta */
-    margin-bottom: 40px !important;/* Espacio inferior */
-    z-index: 100;
-    position: relative;
-}
-
-.morse-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 480px; /* Ajusta el ancho maximo de la imagen */
-    width: 90%;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.morse-card:hover {
-    transform: scale(1.02); /* Efecto sutil al pasar el mouse */
-}
-
-.morse-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 20px;
-    filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.25));
-}
 
 /* ==========================================
    SECCIÓN IMAGEN MORSE DEBAJO DE LA CARTA
@@ -238,8 +200,8 @@ body.cake-page {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 20px !important;    /* Espacio superior respecto a la carta */
-    margin-bottom: 50px !important; /* Espacio inferior para hacer scroll cómodo */
+    margin-top: 20px !important;
+    margin-bottom: 50px !important;
     z-index: 100;
     position: relative;
 }
@@ -248,14 +210,14 @@ body.cake-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 480px; /* Ancho cómodo para que luzca nítida la tarjeta */
+    max-width: 480px;
     width: 90%;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
 
 .morse-card:hover {
-    transform: scale(1.02); /* Sutil animación al pasar el cursor */
+    transform: scale(1.02);
 }
 
 .morse-img {
@@ -272,7 +234,7 @@ body.cake-page {
     max-height: 0;
     overflow: hidden;
     color: #ffffff;
-    font-family: "SloopScript", "Dancing Script", "Brush Script MT", cursive, sans-serif;
+    font-family: "Sloop ScriptThree" !important;
     font-size: 38px;
     text-align: center;
     transition: all 0.5s ease-in-out;
@@ -280,14 +242,14 @@ body.cake-page {
     pointer-events: none;
 }
 
-/* AL PASAR EL CURSOR (HOVER) APARECE EL MENSAJE DEBAJO */
 .morse-card:hover .morse-revealed-text {
     opacity: 1;
     max-height: 100px;
     margin-top: 15px;
 }
+
 /* ==========================================
-   ESTILOS THREADS: USUARIO Y GLOBO
+   ESTILOS THREADS CON GIFS Y BORDE PUNTEADO
    ========================================== */
 
 .threads-post-container {
@@ -298,7 +260,7 @@ body.cake-page {
     max-width: 500px;
     width: 90%;
     margin-top: 30px !important;
-    margin-bottom: 180px !important; /* <--- Aumenta este número para dar más espacio abajo */
+    margin-bottom: 180px !important;
     z-index: 100;
     position: relative;
 }
@@ -338,35 +300,70 @@ body.cake-page {
 .threads-bubble-wrapper {
     position: relative;
     width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
 }
 
 .threads-speech-bubble {
     background-color: #f7f7f8;
-    border-radius: 20px;
-    padding: 25px 20px;
+    border: 2px dashed #b0b0b8;
+    border-radius: 28px;
+    padding: 30px 20px;
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     text-align: center;
     cursor: pointer;
     transition: transform 0.2s ease;
+    z-index: 2;
 }
 
 .threads-speech-bubble:hover {
     transform: scale(1.01);
 }
 
-/* Colita / piquito del globo de diálogo apuntando hacia arriba a la izquierda */
 .threads-speech-bubble::before {
     content: '';
     position: absolute;
-    left: -10px;
-    top: 18px;
+    left: -12px;
+    top: 22px;
     width: 0;
     height: 0;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
-    border-right: 12px solid #f7f7f8;
+    border-right: 12px solid #b0b0b8;
 }
+
+.sticker {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    z-index: 10;
+    pointer-events: none;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+    animation: stickerFloat 3s infinite ease-in-out alternate;
+}
+
+@keyframes stickerFloat {
+    0% { transform: translateY(0px) scale(1); }
+    100% { transform: translateY(-4px) scale(1.08); }
+}
+
+.st-top-1 { top: -10px; left: 12%; animation-delay: 0s; }
+.st-top-2 { top: -10px; left: 32%; animation-delay: 0.3s; }
+.st-top-3 { top: -12px; left: 50%; animation-delay: 0.6s; width: 26px; height: 26px; }
+.st-top-4 { top: -10px; left: 68%; animation-delay: 0.9s; }
+.st-top-5 { top: -10px; left: 88%; animation-delay: 1.2s; }
+
+.st-left-1 { top: 30%; left: -10px; animation-delay: 0.2s; }
+.st-left-2 { top: 70%; left: -10px; animation-delay: 0.7s; }
+
+.st-right-1 { top: 30%; right: -10px; animation-delay: 0.4s; }
+.st-right-2 { top: 70%; right: -10px; animation-delay: 0.8s; }
+
+.st-bot-1 { bottom: -10px; left: 20%; animation-delay: 0.1s; }
+.st-bot-2 { bottom: -10px; left: 50%; animation-delay: 0.5s; }
+.st-bot-3 { bottom: -10px; left: 80%; animation-delay: 0.9s; }
 
 .morse-code-text {
     font-family: monospace;
@@ -386,10 +383,9 @@ body.cake-page {
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     line-height: 1.5;
-    font-family: Arial, sans-serif; /* Fuente Arial aplicada */
+    font-family: Arial, sans-serif;
 }
 
-/* Efecto al pasar el cursor o hacer clic */
 .threads-speech-bubble:hover .morse-code-text,
 .threads-speech-bubble.active .morse-code-text {
     opacity: 0.25;
@@ -400,90 +396,8 @@ body.cake-page {
     opacity: 1;
     max-height: 100px;
     margin-top: 12px;
-   
 }
 
-body.cake-page {
-    min-height: 100vh;
-    height: auto !important;
-    overflow-y: auto !important;
-    padding-bottom: 30px !important; /* <--- Esto crea un espacio obligatorio al final de toda la página */
-}
-/* ==========================================
-   ESTILOS THREADS CON GIFS Y BORDE PUNTEADO
-   ========================================== */
-
-.threads-bubble-wrapper {
-    position: relative;
-    width: 100%;
-    padding: 16px; /* Espacio extra para que tus GIFs no queden encimados */
-    box-sizing: border-box;
-}
-
-/* Globo de diálogo con borde punteado de Threads */
-.threads-speech-bubble {
-    background-color: #f7f7f8;
-    border: 2px dashed #b0b0b8;
-    border-radius: 28px;
-    padding: 30px 20px;
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    z-index: 2;
-}
-
-.threads-speech-bubble:hover {
-    transform: scale(1.01);
-}
-
-/* Piquito del globo apuntando a perfil.PNG */
-.threads-speech-bubble::before {
-    content: '';
-    position: absolute;
-    left: -12px;
-    top: 22px;
-    width: 0;
-    height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-right: 12px solid #b0b0b8;
-}
-
-/* TAMAÑO Y POSICIONAMIENTO DE GIFS REDUCIDOS */
-.sticker {
-    position: absolute;
-    width: 22px;  /* Tamaño más pequeño y delicado */
-    height: 22px;
-    object-fit: contain;
-    z-index: 10;
-    pointer-events: none;
-    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
-    animation: stickerFloat 3s infinite ease-in-out alternate;
-}
-
-@keyframes stickerFloat {
-    0% { transform: translateY(0px) scale(1); }
-    100% { transform: translateY(-4px) scale(1.08); }
-}
-
-/* POSICIONES ALREDEDOR DEL GLOBO */
-.st-top-1 { top: -10px; left: 12%; animation-delay: 0s; }
-.st-top-2 { top: -10px; left: 32%; animation-delay: 0.3s; }
-.st-top-3 { top: -12px; left: 50%; animation-delay: 0.6s; width: 26px; height: 26px; } /* anaangry ligeramente más grande */
-.st-top-4 { top: -10px; left: 68%; animation-delay: 0.9s; }
-.st-top-5 { top: -10px; left: 88%; animation-delay: 1.2s; }
-
-.st-left-1 { top: 30%; left: -10px; animation-delay: 0.2s; }
-.st-left-2 { top: 70%; left: -10px; animation-delay: 0.7s; }
-
-.st-right-1 { top: 30%; right: -10px; animation-delay: 0.4s; }
-.st-right-2 { top: 70%; right: -10px; animation-delay: 0.8s; }
-
-.st-bot-1 { bottom: -10px; left: 20%; animation-delay: 0.1s; }
-.st-bot-2 { bottom: -10px; left: 50%; animation-delay: 0.5s; }
-.st-bot-3 { bottom: -10px; left: 80%; animation-delay: 0.9s; }
 /* ==========================================
    ESTILOS PARA EL LIBRO DE IMÁGENES (CARTA)
    ========================================== */
@@ -526,6 +440,7 @@ body.cake-page {
     width: 100%;
     margin-top: 30px;
 }
+
 .flip-book {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
     border-radius: 6px;
@@ -536,13 +451,13 @@ body.cake-page {
     overflow: hidden;
 }
 
-/* Las imágenes de tu carta se adaptan de forma limpia a toda la página */
 .page-img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Mantiene la proporción exacta de tus fotos escritas a mano */
+    object-fit: contain;
     display: block;
 }
+
 /* ==========================================
    ESTILOS DEL JUEGO DE UNIR
    ========================================== */
@@ -599,7 +514,6 @@ body.cake-page {
     background-color: #352e45;
 }
 
-/* Estados al hacer clic / acertar */
 .game-item.selected {
     border-color: #ff9ebb;
     background-color: #523a4b;
@@ -620,6 +534,7 @@ body.cake-page {
     font-size: 15px;
     color: #ffb3c6;
 }
+
 /* ==========================================
    ESTILOS PARA LA IMAGEN Y MENSAJE DE VICTORIA
    ========================================== */
@@ -636,9 +551,9 @@ body.cake-page {
 }
 
 .win-image {
-    width: 180px; /* Imagen un poco más grande y llamativa */
+    width: 180px;
     height: auto;
-    object-fit: contain;
+    object-fit: contain; /* <-- Cambiado de object-init a object-fit */
     animation: bounceGrow 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     filter: drop-shadow(0 4px 12px rgba(255, 153, 187, 0.5));
 }
@@ -652,12 +567,10 @@ body.cake-page {
     animation: fadeInText 0.8s ease-in-out forwards;
 }
 
-/* Clase para ocultar el tablero de botones suavemente cuando gane */
 .game-board.hidden {
     display: none !important;
 }
 
-/* Animación de crecimiento y salto */
 @keyframes bounceGrow {
     0% {
         transform: scale(0);
@@ -671,9 +584,4 @@ body.cake-page {
         transform: scale(1);
         opacity: 1;
     }
-}
-
-@keyframes fadeInText {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
