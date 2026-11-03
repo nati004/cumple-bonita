@@ -1,11 +1,11 @@
 @font-face {
     font-family: "SloopScript";
-    src: url("fonts/Sloop-ScriptThree-Regular.ttf") format("truetype");
+    src: url("./fonts/SloopScript.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Relationship";
-    src: url("fonts/Relationship of mÇlodrame.ttf") format("truetype");
+    src: url("./fonts/Relationship.ttf") format("truetype");
 }
 
 /* ==========================================
