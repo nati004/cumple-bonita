@@ -38,12 +38,12 @@
 
     <!-- AUDIO DE FONDO CON EL ARCHIVO LOCAL -->
     <audio id="bg-audio" loop>
-        <source src="Lizzy_McAlpine_-_The_light_in_the_painting.mp3" type="audio/mpeg">
+        <source src="Taylor-Timeless.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
     <!-- Botón flotante para reproducir o pausar la música -->
-    <button id="music-btn" class="music-control-btn" onclick="toggleMusic()">🎵 Reproducir música</button>
+    <button id="music-btn" class="music-control-btn" onclick="toggleMusic()">Reproducir música</button>
 
     <!-- Botón para regresar al pastel -->
     <a href="pastel.html" class="back-btn">← Volver al pastel</a>
@@ -102,7 +102,7 @@
                 fadeInAudio();
             } else {
                 audio.pause();
-                musicBtn.textContent = "The light in the painting";
+                musicBtn.textContent = "Reproducir Timeless";
             }
         }
 
