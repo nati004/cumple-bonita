@@ -38,7 +38,7 @@
 
     <!-- AUDIO DE FONDO CON EL ARCHIVO LOCAL -->
     <audio id="bg-audio" loop>
-        <source src="Taylor-Timeless.mp3" type="audio/mpeg">
+        <source src="Taylor_Swift_-_Timeless_Taylors_Version_From_The_Vault_Lyric_Video.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
@@ -92,11 +92,6 @@
             });
         }
 
-        // Adelantar los primeros 15 segundos de la canción
-        audio.addEventListener('loadedmetadata', function() {
-            audio.currentTime = 15;
-        });
-
         function toggleMusic() {
             if (audio.paused) {
                 fadeInAudio();
@@ -107,7 +102,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Iniciar con el efecto de entrada suave al cargar la página
+            // Iniciar con el efecto de entrada suave al cargar la página desde el segundo 0
             fadeInAudio();
 
             // Inicializar el Flipbook
